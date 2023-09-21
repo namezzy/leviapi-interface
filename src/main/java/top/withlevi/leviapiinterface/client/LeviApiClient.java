@@ -1,6 +1,7 @@
 package top.withlevi.leviapiinterface.client;
 
 
+import cn.hutool.core.util.RandomUtil;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;
 import cn.hutool.http.HttpUtil;
@@ -10,14 +11,25 @@ import org.springframework.web.bind.annotation.RequestParam;
 import top.withlevi.leviapiinterface.model.User;
 
 import java.util.HashMap;
+import java.util.Map;
+
+import static top.withlevi.leviapiinterface.utils.SignUtils.genSign;
 
 /**
  * Created on 9/21/2023 11:16 AM
  *
  * @author Levi
  */
-public class leviClient {
+public class LeviApiClient {
 
+    private String accessKey;
+
+    private String secretKey;
+
+    public LeviApiClient(String accessKey, String secretKey) {
+        this.accessKey = accessKey;
+        this.secretKey = secretKey;
+    }
 
     public String getNameByGet(String name) {
 
@@ -41,11 +53,31 @@ public class leviClient {
     }
 
 
-    public String getUsernameByPost(@RequestBody User user) {
+    /**
+     * @param body 对密钥签名进行处理
+     * @return
+     */
 
+    private Map<String, String> genHeaderMap(String body) {
+        Map<String, String> hashMap = new HashMap<>();
+
+        hashMap.put("accessKey", accessKey);
+        // 不能直接发送
+        // hashMap.put("secretKey", secretKey);
+        hashMap.put("nonce", RandomUtil.randomNumbers(4));
+        hashMap.put("body", body);
+        hashMap.put("timestamp", String.valueOf(System.currentTimeMillis() / 1000));
+        hashMap.put("sign", genSign(body, secretKey));
+
+        return hashMap;
+    }
+
+
+    public String getUsernameByPost(@RequestBody User user) {
 
         String json = JSONUtil.toJsonStr(user);
         HttpResponse httpResponse = HttpRequest.post("http://localhost:8123/api/name/user")
+                .addHeaders(genHeaderMap(json))
                 .body(json)
                 .execute();
         System.out.println("Status Code: " + httpResponse.getStatus());

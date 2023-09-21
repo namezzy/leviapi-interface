@@ -1,6 +1,6 @@
 package top.withlevi.leviapiinterface;
 
-import top.withlevi.leviapiinterface.client.leviClient;
+import top.withlevi.leviapiinterface.client.LeviApiClient;
 import top.withlevi.leviapiinterface.model.User;
 
 /**
@@ -11,11 +11,14 @@ import top.withlevi.leviapiinterface.model.User;
 public class Main {
 
     public static void main(String[] args) {
-        leviClient leviClient = new leviClient();
+        String accessKey = "levi";
+        String secretKey = "levi-key";
+
+        LeviApiClient leviClient = new LeviApiClient(accessKey,secretKey);
         String name1 = leviClient.getNameByGet("小米椒");
         String name2 = leviClient.getNameByPost("崽崽");
         User user = new User();
-        user.setUserName("椒椒");
+        user.setUserName("jiaojiao");
         String name3 = leviClient.getUsernameByPost(user);
 
         System.out.println(name1);
