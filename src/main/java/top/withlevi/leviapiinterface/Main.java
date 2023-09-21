@@ -1,7 +1,7 @@
 package top.withlevi.leviapiinterface;
 
-import top.withlevi.leviapiinterface.client.LeviApiClient;
-import top.withlevi.leviapiinterface.model.User;
+import top.withlevi.leviapiclientsdk.client.LeviApiClient;
+import top.withlevi.leviapiclientsdk.model.User;
 
 /**
  * Created on 9/21/2023 11:32 AM

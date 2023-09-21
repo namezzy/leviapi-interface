@@ -5,3 +5,7 @@ server:
   port: 8123
   servlet:
     context-path: /api
+leviapi:
+  client:
+    access-key: levi
+    secret-key: levi-key

@@ -1,8 +1,9 @@
 package top.withlevi.leviapiinterface.controller;
 
 import org.springframework.web.bind.annotation.*;
-import top.withlevi.leviapiinterface.model.User;
-import top.withlevi.leviapiinterface.utils.SignUtils;
+import top.withlevi.leviapiclientsdk.model.User;
+import top.withlevi.leviapiclientsdk.utils.SignUtils;
+
 
 import javax.servlet.http.HttpServletRequest;
 
