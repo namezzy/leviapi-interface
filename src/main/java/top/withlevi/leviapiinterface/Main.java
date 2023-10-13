@@ -18,7 +18,7 @@ public class Main {
         String name1 = leviClient.getNameByGet("小米椒");
         String name2 = leviClient.getNameByPost("崽崽");
         User user = new User();
-        user.setUserName("jiaojiao");
+        user.setUsername("jiaojiao");
         String name3 = leviClient.getUsernameByPost(user);
 
         System.out.println(name1);
